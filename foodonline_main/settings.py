@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -86,6 +87,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'accounts.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -121,13 +123,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 #for production server
 STATIC_ROOT = BASE_DIR/'staticfiles' #run collectstatic,staticfiles will be copied into this file
 #for local computer dev server
 STATICFILES_DIRS =[
     BASE_DIR/'static'
 ]
+
+#media files configuration
+
+MEDIA_URL ='/media/' #拼接的url
+MEDIA_ROOT = BASE_DIR/'mediafiles' #实际上存储的位置
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
