@@ -91,4 +91,4 @@ def logout(request):
     messages.info(request,'you are logged out')
     return redirect('login')
 def dashboard(request):
-    return render(request,'accounts/dashboard.html')1
+    return render(request,'accounts/dashboard.html')
