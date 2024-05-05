@@ -94,6 +94,10 @@ class UserProfile(models.Model):
     longitude = models.CharField(max_length=20,blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+
+    #还能这么玩
+    def full_address(self):
+        return f'{self.address_line1},{self.address_line2}'
     
     def __str__(self):
         return self.user.email

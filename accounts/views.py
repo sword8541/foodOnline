@@ -7,6 +7,7 @@ from .utils import detectUser,send_email_verification
 from django.contrib.auth.decorators import login_required
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
+from vendor.models import Vendor
 # Create your views here.
 
 def registerUser(request):
@@ -136,6 +137,8 @@ def custDashboard(request):
 
 @login_required(login_url='login')
 def vendorDashboard(request):
+    vendor = Vendor.objects.get(user=request.user)
+ 
     return render(request,'accounts/vendorDashboard.html')
 
 

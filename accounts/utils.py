@@ -5,6 +5,7 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from django.conf import settings
+import smtplib
 
 def detectUser(user):
     if user.role ==1:
@@ -27,3 +28,17 @@ def send_email_verification(request,user,mail_subject,email_template):
     to_email=user.email
     mail=EmailMessage(mail_subject,message,from_email,to=[to_email])
     mail.send()
+                    
+def send_notification(mail_subject,email_template,context):
+    from_email = settings.DEFAULT_FROM_EMAIL
+    message=render_to_string(email_template,context)
+    to_email=context['user'].email
+    mail=EmailMessage(mail_subject,message,from_email,to=[to_email])
+    mail.send()
+   
+def send_notification_smtplib(mail_subject,context):
+    sender_email= 'wesleyfang09@gmail.com'
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as connection:
+        connection.login(sender_email, password='lookyjason224')
+        connection.sendmail(sender_email, context['user'].email, mail_subject) 
+        connection.quit()
